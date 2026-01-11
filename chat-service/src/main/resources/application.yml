@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: chat-service
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/reactive_chat}
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+server:
+  port: 8082
+
+app:
+  jwt:
+    secret: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBiwhez2OFSgSyEFS6ezqNVGadEQCBGeLm409kCXF0rZ6QWaxxpj75yGuKzge59oCbakzz38utr8tCgH7qZ98pJ/AhgxaFb6/mWNExkgOOagSB45FKvPRoq/3DwvdDtUiP9IRWK96fyu+fAecVTCYDbZHC4oAmWQHZO3xOvA4R4wIDAQAB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    com.reactivechat: DEBUG

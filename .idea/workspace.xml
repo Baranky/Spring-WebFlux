@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="eed0fbf2-1f9f-4bee-8ef4-986014e45e72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/reactivechat/auth/security/JwtReactiveAuthenticationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Microservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SpringWebFlux.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/java/com/example/ApiGateway/ApiGatewayApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/src/test/java/com/example/ApiGateway/ApiGatewayApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/src/main/java/com/example/ApiGateway/EurekaServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EurekaService/src/test/java/com/example/ApiGateway/EurekaServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/InventoryServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/config/KafkaConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/controller/InventoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/dto/StockDeductionRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/entity/Inventory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/event/StockDeductionRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/event/StockDeductionResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/listener/StockDeductionListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/repository/InventoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/example/InventoryService/service/InventoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/test/java/com/example/InventoryService/InventoryServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/OrderServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/client/InventoryClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/client/ProductClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/config/KafkaConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/config/ResilienceConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/config/WebClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/controller/OrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/dto/OrderRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/dto/ProductDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/entity/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/enums/OrderStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/event/StockDeductionRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/event/StockDeductionResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/listener/StockDeductionResponseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/repository/OrderRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/example/ProductService/service/OrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/test/java/com/example/ApiGateway/EurekaServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/OrderServiceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/client/ProductClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/config/KafkaConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/controller/OrderController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/dto/OrderRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/dto/ProductDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/entity/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/enums/OrderStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/event/OrderCancelledEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/event/OrderEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/event/PaymentConfirmedEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/event/StockReleasedEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/listener/OrderEventListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/repository/OrderRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/example/ProductService/service/OrderService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/ProductServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/client/InventoryClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/config/WebClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/controller/ProductController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/dto/InventoryRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/dto/ProductRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/repository/ProductRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/java/com/example/ProductService/service/ProductService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductService/src/test/java/com/example/ApiGateway/ProductServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\Users\baran\.m2\repository" />
+        <option name="userSettingsFile" value="C:\Users\baran\.m2\settingsBireysel.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="386aeODZ6PZNRI16BoqXZmhtbge" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/baran/projeler/spring/SpringWebflux/notification-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.18554688",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.PresenceServiceApplication">
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.reactivechat.gateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.reactivechat.auth.AuthServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChatServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="chat-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.reactivechat.chat.ChatServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="notification-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.reactivechat.notification.NotificationServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PresenceServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="presence-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.reactivechat.presence.PresenceServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.zipkin: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="zipkin" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml.zipkin: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eed0fbf2-1f9f-4bee-8ef4-986014e45e72" name="Changes" comment="" />
+      <created>1768122569141</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768122569141</updated>
+      <workItem from="1768122570318" duration="62000" />
+      <workItem from="1771659221733" duration="9604000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

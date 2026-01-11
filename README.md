@@ -1,199 +1,128 @@
-# Spring Cloud Microservices Demo: Event-Driven Architecture with Saga Pattern
+# Reactive Chat
 
-Bu proje, **Spring Boot 3** ve **Spring Cloud** teknolojileri kullanılarak geliştirilmiş, ölçeklenebilir ve hataya dayanıklı (fault-tolerant) bir mikroservis mimarisi örneğidir. Proje temel olarak Service Discovery, API Gateway, **Resilience4j ile Circuit Breaker**, **Event-Driven Architecture (Kafka)**, **Saga Pattern (Choreography)**, ve **Distributed Tracing (Zipkin)** desenlerini demonstrasyonunu içerir.
+Event-driven, reaktif bir sohbet uygulaması. Spring WebFlux, Redis Pub/Sub, MongoDB ve JWT ile mikroservis mimarisi.
 
-##  İçindekiler
+---
 
-- [Mimari ve Servisler]
-- [Saga Pattern İş Akışı]
-- [Teknolojiler]
-- [Kurulum ve Çalıştırma]
-- [API Endpoints]
-- [Monitoring ve Tracing]
+## Mimari
 
-##  Mimari ve Servisler
-
-Proje 6 ana mikroservisten oluşur:
-
-| Servis | Port | Açıklama |
-| :--- |:-------| :--- |
-| **EurekaService** | `8761` | Service Discovery sunucusu. Tüm servislerin kayıt defteridir. |
-| **ApiGateway** | `8082` | Dış dünyaya açılan tek kapı (Entry Point). Spring Cloud Gateway. |
-| **ProductService** | `8092` | Ürün yönetim servisi. PostgreSQL veritabanı kullanır. Ürün oluşturulduğunda InventoryService'e stock bilgisini gönderir. |
-| **OrderService** | `8093` | Sipariş servisi. Resilience4j Circuit Breaker içerir. Sipariş oluşturulduğunda Kafka'ya event gönderir. |
-| **InventoryService** | `8094` | Stok yönetim servisi. PostgreSQL veritabanı kullanır. Kafka'dan sipariş event'lerini dinler ve stok düşürür. |
-| **PaymentService** | `8095` | Ödeme servisi. PostgreSQL veritabanı kullanır. Saga Pattern ile ödeme işlemlerini yönetir. |
-
-##  Saga Pattern İş Akışı
-
-### Başarılı Sipariş Akışı
-
-1. **Sipariş Oluşturma:**
-   - Kullanıcı `OrderService`'e sipariş oluşturur
-   - `OrderService` siparişi veritabanına kaydeder (status: `PENDING`)
-   - `OrderService` Kafka'ya `order-placed` event gönderir
-
-2. **Stok Rezervasyonu:**
-   - `InventoryService` `order-placed` event'ini dinler
-   - Stok kontrolü yapar
-   - Stok yeterliyse stok düşülür ve `stock-reserved` event yayınlanır
-   - Stok yetersizse `order-cancelled` event yayınlanır
-
-3. **Ödeme İşlemi:**
-   - `PaymentService` `stock-reserved` event'ini dinler
-   - PENDING status ile Payment kaydı oluşturur
-   - Manuel ödeme için API endpoint'i bekler
-
-4. **Manuel Ödeme:**
-   - `POST /api/payments/{id}/process` endpoint'i çağrılır
-   - Ödeme başarılı olursa `payment-confirmed` event yayınlanır
-   - Ödeme reddedilirse (`POST /api/payments/{id}/reject`) `payment-failed` event yayınlanır
-
-5. **Sipariş Onaylama:**
-   - `OrderService` `payment-confirmed` event'ini dinler
-   - Sipariş status `CONFIRMED` olur
-
-### Compensation (Geri Alma) Akışı
-
-Ödeme başarısız olduğunda:
-
-1. `PaymentService` → `payment-failed` event yayınlar
-2. `InventoryService` → Stokları geri ekler ve `stock-released` event yayınlar
-3. `OrderService` → Sipariş status `CANCELLED` olur
-
-## Teknolojiler
-
-- **Dil:** Java 21
-- **Framework:** Spring Boot 3.5.x, Spring Cloud 2025.0.0
-- **Discovery:** Netflix Eureka Client / Server
-- **Gateway:** Spring Cloud Gateway
-- **İletişim:** 
-  - Spring Cloud OpenFeign (Senkron servis çağrıları)
-  - Apache Kafka (Asenkron event-driven iletişim)
-- **Pattern:** Saga Pattern (Choreography)
-- **Resilience:** Spring Cloud Circuit Breaker (Resilience4j)
-- **Tracing:** Zipkin (Distributed Tracing)
-- **Veritabanı:** PostgreSQL, Spring Data JPA
-- **Mesajlaşma:** Apache Kafka, Zookeeper
-- **Araçlar:** Lombok, Maven, Docker Compose
-
-## Docker Compose Servisleri
-
-Proje kök dizinindeki `docker-compose.yml` dosyası şu servisleri içerir:
-
-| Servis | Port | Açıklama |
-| :--- | :--- | :--- |
-| **Zookeeper** | `2181` | Kafka için koordinasyon servisi |
-| **Kafka** | `9092` | Event streaming platformu |
-| **Kafka UI** | `8096` | Kafka topic'lerini görüntülemek için web arayüzü |
-| **Zipkin** | `9411` | Distributed tracing UI |
-
-## Kurulum ve Çalıştırma
-
-### 1. Docker Servislerini Başlat
-
-```bash
-docker compose up -d
+```
+                    ┌─────────────────┐
+                    │  API Gateway    │
+                    │  localhost:8080 │
+                    └────────┬────────┘
+                             │
+         ┌───────────────────┼───────────────────┐
+         ▼                   ▼                   ▼
+┌────────────────┐  ┌────────────────┐  ┌────────────────┐
+│ Auth Service   │  │ Chat Service   │  │Presence Service │  │ Notification │
+│     :8081      │  │     :8082      │  │     :8083       │  │    :8084     │
+│ Kayıt, Login,  │  │ Odalar, Mesaj, │  │ Online/Offline  │  │   Event      │
+│ JWT, Refresh   │  │ WebSocket      │  │ Heartbeat       │  │   listener   │
+└───────┬────────┘  └───────┬────────┘  └────────┬────────┘  └──────┬──────┘
+        │                   │                    │                    │
+        ▼                   ▼                    ▼                    ▼
+   MongoDB (auth)      MongoDB + Redis      Redis (set)          Redis (sub)
 ```
 
-Bu komut şunları başlatır:
-- Zookeeper
-- Kafka
-- Kafka UI (http://localhost:8096)
-- Zipkin (http://localhost:9411)
+- Tüm HTTP/WebSocket istekleri **Gateway (8080)** üzerinden gider; JWT doğrulama burada yapılır.
+- **Auth:** Kayıt, login, access + refresh token.
+- **Chat:** Oda oluşturma, mesaj geçmişi (REST), canlı mesajlaşma (WebSocket), Redis Pub/Sub.
+- **Presence:** Kullanıcı online/offline, heartbeat, son görülme.
+- **Notification:** Redis kanallarını dinleyerek offline bildirim mantığı.
 
-### 2. PostgreSQL Veritabanlarını Oluştur
+---
 
-Aşağıdaki veritabanlarını PostgreSQL'de oluşturun:
-- `product` (ProductService için)
-- `orderdb` (OrderService için)
-- `inventory` (InventoryService için)
-- `paymentt` (PaymentService için)
+## Teknoloji
 
-### 3. Servisleri Başlat (Sırayla)
+| Alan        | Teknoloji                          |
+|------------|-------------------------------------|
+| Backend    | Spring Boot 3.x/4.x, Spring WebFlux |
+| Gateway    | Spring Cloud Gateway (reaktif)      |
+| Güvenlik   | JWT (JJWT 0.11), Spring Security   |
+| Veritabanı | MongoDB (Reactive)                  |
+| Mesajlaşma | Redis Pub/Sub                       |
+| Java       | 21                                  |
 
-1. **EurekaService** - Service Discovery (Port: 8761)
-2. **ProductService** - Port 8092
-3. **OrderService** - Port 8093
-4. **InventoryService** - Port 8094
-5. **PaymentService** - Port 8095
-6. **ApiGateway** - Port 8082
+---
 
-##  API Endpoints
+## Gereksinimler
 
-### ProductService (Port: 8092)
+- **Java 21**
+- **Maven 3.8+**
+- **Docker & Docker Compose** (MongoDB, Redis)
 
-- `GET /api/products` - Tüm ürünleri listele
-- `GET /api/products/{id}` - Ürün detayı
-- `POST /api/products` - Yeni ürün oluştur (stock bilgisi ile)
-- `PUT /api/products/{id}` - Ürün güncelle
-- `DELETE /api/products/{id}` - Ürün sil (InventoryService'den de silinir)
+---
 
-### OrderService (Port: 8093)
+## Hızlı Başlangıç
 
-- `GET /api/orders` - Tüm siparişleri listele
-- `GET /api/orders/{id}` - Sipariş detayı
-- `GET /api/orders/customer/{email}` - Müşteri siparişleri
-- `POST /api/orders` - Yeni sipariş oluştur (Kafka'ya event gönderir)
-- `PUT /api/orders/{id}` - Sipariş güncelle
-- `DELETE /api/orders/{id}` - Sipariş sil
+### 1. Altyapı
 
-### InventoryService (Port: 8094)
+```bash
+docker-compose up -d
+```
 
-- `POST /api/inventory` - Stok kaydı oluştur
-- `DELETE /api/inventory/product/{productId}` - Ürün stok kaydını sil
+### 2. Servisleri başlat
 
-### PaymentService (Port: 8095)
+Sıra önemli değil; Gateway diğerlerine 8081–8084’ten bağlanır.
 
-- `GET /api/payments` - Tüm ödemeleri listele
-- `GET /api/payments/{id}` - Ödeme detayı
-- `GET /api/payments/order/{orderId}` - Order ID'ye göre ödeme getir
-- `GET /api/payments/pending` - PENDING status'lu ödemeleri listele
-- `GET /api/payments/failed` - Başarısız ödemeleri listele (retry için)
-- `POST /api/payments/{id}/process` - Manuel ödeme işlemini gerçekleştir
-- `POST /api/payments/{id}/reject` - Ödemeyi reddet (sipariş iptal edilir)
-- `POST /api/payments/{id}/retry` - Ödeme işlemini tekrar dene
+### 3. Base URL
 
-##  Monitoring ve Tracing
+Tüm REST istekleri **Gateway** üzerinden:
 
-### Eureka Dashboard
+- **Base URL:** `http://localhost:8080`
+- **WebSocket:** `ws://localhost:8080/ws/chat?roomId=<oda>&token=<accessToken>`
 
-- **URL:** http://localhost:8761
-- Servislerin kayıtlı olup olmadığını kontrol etmek için
+---
 
-### Kafka UI
+## Postman Collection
 
-- **URL:** http://localhost:8096
-- Topic'leri ve event'leri görüntülemek için
+API ve WebSocket’i Postman ile test etmek için hazır collection:
 
-### Zipkin UI
+** [apiler](https://web.postman.co/workspace/Personal-Workspace~5d4ba628-e1fc-46f3-b40e-86e8c38346b2/collection/37942261-b7dfa56a-da3d-43c8-974d-d9f56dec02b7?action=share&source=copy-link&creator=37942261
+)
 
-- **URL:** http://localhost:9411
-- Distributed tracing için tüm servisler arasındaki istek akışını görüntüleyebilirsiniz
+** [websocket](https://web.postman.co/workspace/Personal-Workspace~5d4ba628-e1fc-46f3-b40e-86e8c38346b2/collection/699981ca3d43333f1620463f?action=share&source=copy-link&creator=37942261
+): 
+- **Auth:** Register, Login, Refresh Token
+- **Presence:** Online, Heartbeat, Offline, Status, Online listesi
+- **Chat:** Oda oluştur, Benim odalarım, Mesaj geçmişi
+- **WebSocket:** Bağlantı örneği (URL’de `roomId` ve `token`)
 
-##  Kafka Topics
+Login sonrası dönen `accessToken` değerini environment’ta saklayıp diğer isteklerde `Authorization: Bearer {{accessToken}}` kullanın.
 
-| Topic | Açıklama | Publisher | Consumer |
-| :--- | :--- | :--- | :--- |
-| `order-placed` | Sipariş oluşturulduğunda | OrderService | InventoryService |
-| `stock-reserved` | Stok rezerve edildiğinde | InventoryService | PaymentService |
-| `stock-released` | Stok geri bırakıldığında | InventoryService | OrderService |
-| `payment-confirmed` | Ödeme başarılı olduğunda | PaymentService | OrderService |
-| `payment-failed` | Ödeme başarısız olduğunda | PaymentService | InventoryService |
-| `order-cancelled` | Sipariş iptal edildiğinde | InventoryService | OrderService |
+---
 
-## Test Araçları
+## API Özeti
 
-- **Postman / cURL** - API istekleri için
-- **Kafka UI** - Event'leri görüntülemek için
-- **Zipkin** - Transaction trace'lerini görüntülemek için
-- **Eureka Dashboard** - Servis durumunu kontrol etmek için
+| Method | Endpoint | Açıklama |
+|--------|----------|----------|
+| POST | `/auth/register` | Kayıt |
+| POST | `/auth/login` | Login (access + refresh token) |
+| POST | `/auth/refresh` | Token yenileme |
+| POST | `/api/presence/online` | Online yap |
+| POST | `/api/presence/heartbeat` | Heartbeat |
+| POST | `/api/presence/offline` | Offline yap |
+| GET | `/api/presence/{userId}/status` | Kullanıcı durumu |
+| GET | `/api/presence/online` | Online kullanıcı listesi |
+| POST | `/api/rooms` | Oda oluştur (body: `{"name":"..."}`) |
+| GET | `/api/rooms` | Benim odalarım |
+| GET | `/api/rooms/{roomId}/messages?limit=50` | Mesaj geçmişi |
+| WebSocket | `/ws/chat?roomId=...&token=...` | Canlı mesaj (gönder: `{"content":"..."}` veya `{"roomId":"...","content":"..."}`) |
 
-##  Önemli Notlar
+Tüm REST isteklerinde (login/register hariç) header: `Authorization: Bearer <accessToken>`.
 
-- Tüm servisler Eureka'ya kayıtlı olmalıdır
-- Kafka ve Zookeeper çalışıyor olmalıdır
-- PostgreSQL veritabanları oluşturulmuş olmalıdır
-- Ödeme işlemi manuel olarak API üzerinden yapılır
-- Saga Pattern Choreography yaklaşımı kullanılmaktadır
+---
+
+## WebSocket
+
+1. Bağlan: `ws://localhost:8080/ws/chat?roomId=room1&token=ACCESS_TOKEN`
+2. Mesaj gönder (json): `{"content":"Merhaba"}` veya `{"roomId":"room1","content":"Merhaba"}`
+3. Aynı odadaki tüm bağlı client’lar mesajı anında alır.
+
+
+---
+
+
+
 

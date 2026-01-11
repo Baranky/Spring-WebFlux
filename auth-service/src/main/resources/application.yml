@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: auth-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/reactive_chat_auth
+
+server:
+  port: 8081
+
+app:
+  jwt:
+    secret: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBiwhez2OFSgSyEFS6ezqNVGadEQCBGeLm409kCXF0rZ6QWaxxpj75yGuKzge59oCbakzz38utr8tCgH7qZ98pJ/AhgxaFb6/mWNExkgOOagSB45FKvPRoq/3DwvdDtUiP9IRWK96fyu+fAecVTCYDbZHC4oAmWQHZO3xOvA4R4wIDAQAB
+    access-validity-ms: 900000
+    refresh-validity-ms: 604800000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    com.reactivechat: DEBUG
+    org.springframework.security: INFO

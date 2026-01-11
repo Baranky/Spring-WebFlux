@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: api-gateway
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: GET,POST,PUT,DELETE,OPTIONS
+            allowedHeaders: "*"
+      routes:
+        - id: auth-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/auth/**
+        - id: chat-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/rooms/**,/ws/**
+        - id: presence-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/presence/**
+        - id: notification-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/notifications/**
+
+app:
+  jwt:
+    secret: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBiwhez2OFSgSyEFS6ezqNVGadEQCBGeLm409kCXF0rZ6QWaxxpj75yGuKzge59oCbakzz38utr8tCgH7qZ98pJ/AhgxaFb6/mWNExkgOOagSB45FKvPRoq/3DwvdDtUiP9IRWK96fyu+fAecVTCYDbZHC4oAmWQHZO3xOvA4R4wIDAQAB
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway,prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
