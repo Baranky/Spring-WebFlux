@@ -1,6 +1,9 @@
 # Reactive Chat
+Event-driven ve tamamen reaktif mimariyle geliştirilmiş gerçek zamanlı bir sohbet (chat) uygulaması.
 
-Event-driven, reaktif bir sohbet uygulaması. Spring WebFlux, Redis Pub/Sub, MongoDB ve JWT ile mikroservis mimarisi.
+Bu proje, modern mikroservis mimarisinin gerçek zamanlı iletişim senaryolarında nasıl uygulanabileceğini göstermek amacıyla geliştirilmiştir. Uygulama, yüksek eşzamanlı kullanıcıyı düşük kaynak tüketimiyle yönetebilmek için Spring WebFlux ve non-blocking I/O modelini temel alır.
+
+Gerçek zamanlı mesajlaşma için WebSocket, servisler arası mesaj yayılımı için Redis Pub/Sub, kalıcı veri saklama için MongoDB, kimlik doğrulama için ise JWT kullanılmaktadır.
 
 ---
 
